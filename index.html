@@ -1,0 +1,476 @@
+<html>
+
+<head>
+
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+@import url("https://fonts.googleapis.com/css2?family=Poiret+One&display=swap");
+:root {
+  --font-poiret: "Poiret One", sans-serif;
+}
+
+
+body{
+  background : url("https://images.unsplash.com/photo-1699891730676-037bed3c1bed?q=80&w=2664&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+}
+
+  h1{
+    background-color:rgb(49, 49, 49);
+    font-size:100px;
+    color:#2596be;
+    text-align:center;
+    font-family:"Poiret One", sans-serif;
+    border: 2px solid #2596be;
+  }
+
+
+  .inputbox{
+  position: relative;
+  width: 500px;
+  margin:auto;
+}
+
+.inputbox input{
+  position: relative;
+  width: 100%;
+  padding: 20px 10px 10px;
+  background: transparent;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  color: #23242a;
+  font-size: 1em;
+  letter-spacing: 0.05em;
+  transition: 0.5s;
+  z-index: 10;
+}
+
+.inputbox span {
+  position: absolute;
+  left: 0;
+  padding: 20px 10px 10px;
+  font-size: 1em;
+  color: #8f8f8f;
+  letter-spacing: 00.05em;
+  transition: 0.5s;
+  pointer-events: none;
+}
+
+.inputbox input:valid ~span,
+.inputbox input:focus ~span {
+  color: #45f3ff;
+ 
+  transform: translateX(-10px) translateY(-34px);
+  font-size: 0,75em;
+}
+
+.inputbox i {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: #45f3ff;
+  border-radius: 4px;
+  transition: 0.5s;
+  pointer-events: none;
+  z-index: 9;
+}
+
+.inputbox input:valid ~i,
+.inputbox input:focus ~i {
+  height: 44px;
+}
+
+.gen{
+  position:relative;
+  margin:auto;
+  width:0px;
+}
+
+button{
+ padding: 0.8em 1.8em;
+ border: 2px solid #17C3B2;
+ position: relative;
+ overflow: hidden;
+ background-color: transparent;
+ text-align: center;
+ text-transform: uppercase;
+ font-size: 16px;
+ transition: .3s;
+ z-index: 1;
+ font-family: inherit;
+ color: #17C3B2;
+}
+
+button::before{
+ content: '';
+ width: 0;
+ height: 300%;
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%) rotate(45deg);
+ background: #17C3B2;
+ transition: .5s ease;
+ display: block;
+ z-index: -1;
+}
+
+button:hover::before{
+ width: 105%;
+}
+
+button:hover{
+ color: #111;
+}
+
+#imgdisplayer{
+  width:75%;
+  position: relative;
+  margin:auto;
+}
+
+
+
+
+
+
+#loader {
+  width: 120px;
+  height: 150px;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(#ddd 50%, #bbb 51%),
+    linear-gradient(#ddd, #ddd), linear-gradient(#ddd, #ddd),
+    radial-gradient(ellipse at center, #aaa 25%, #eee 26%, #eee 50%, #0000 55%),
+    radial-gradient(ellipse at center, #aaa 25%, #eee 26%, #eee 50%, #0000 55%),
+    radial-gradient(ellipse at center, #aaa 25%, #eee 26%, #eee 50%, #0000 55%);
+  background-position: 0 20px, 45px 0, 8px 6px, 55px 3px, 75px 3px, 95px 3px;
+  background-size: 100% 4px, 1px 23px, 30px 8px, 15px 15px, 15px 15px, 15px 15px;
+  position: relative;
+  border-radius: 6%;
+  animation: shake 3s ease-in-out infinite;
+  transform-origin: 60px 180px;
+  display: none;
+  margin:auto;
+}
+
+#loader:before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 100%;
+  width: 7px;
+  height: 5px;
+  background: #aaa;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 102px 0 #aaa;
+}
+
+#loader:after {
+  content: "";
+  position: absolute;
+  width: 95px;
+  height: 95px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  bottom: 20px;
+  background-color: #bbdefb;
+  background-image: linear-gradient( to right, #0004 0%, #0004 49%, #0000 50%, #0000 100% ),
+    linear-gradient(135deg, #64b5f6 50%, #607d8b 51%);
+  background-size: 30px 100%, 90px 80px;
+  border-radius: 50%;
+  background-repeat: repeat, no-repeat;
+  background-position: 0 0;
+  box-sizing: border-box;
+  border: 10px solid #DDD;
+  box-shadow: 0 0 0 4px #999 inset, 0 0 6px 6px #0004 inset;
+  animation: spin 3s ease-in-out infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg)
+  }
+
+  50% {
+    transform: rotate(360deg)
+  }
+
+  75% {
+    transform: rotate(750deg)
+  }
+
+  100% {
+    transform: rotate(1800deg)
+  }
+}
+
+@keyframes shake {
+  65%, 80%, 88%, 96% {
+    transform: rotate(0.5deg)
+  }
+
+  50%, 75%, 84%, 92% {
+    transform: rotate(-0.5deg)
+  }
+
+  0%, 50%, 100% {
+    transform: rotate(0)
+  }
+}
+
+
+
+.box {
+  position: relative;
+  width:100px;
+  margin: auto;
+  transform: translate(-50%, -50%);
+}
+
+.box select {
+  background-color: #17C3B2;
+  color: white;
+  padding: 12px;
+  width: 250px;
+  border: none;
+  font-size: 20px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
+}
+
+.box::before {
+  content: "\f13a";
+  font-family: FontAwesome;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  font-size: 28px;
+  line-height: 45px;
+  color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+.box:hover::before {
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.box select option {
+  padding: 30px;
+}
+
+
+
+
+</style>
+</head>
+
+<body>
+
+
+ <h1>DON INK AI TATTOO GENERATOR</h1> 
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<p id="code"></p>
+
+<div class="inputbox" >
+  <input required="required" id="inputuserva" type="textarea">
+  <span>Describe your design</span>
+  <i></i>
+</div>
+
+<div class="gen">
+<button  onclick="geetafunction()">GENERATE</button>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="box" >
+  <select id="styleSelect">
+    <option value="enhance">enhance</option>
+    <option value="anime">anime</option>
+    <option value="photographic">photographic</option>
+    <option value="digital-art">digital-art</option>
+    <option value="comic-book">comic-book</option>
+    <option value="analog-film">analog-film</option>
+    <option value="neonpunk">neonpunk</option>
+    <option value="lowpoly">lowpoly</option>
+    <option value="origami">origami</option>
+    <option value="line-art">line-art</option>
+    <option value="craft-clay">craft-clay</option>
+    <option value="cinematic">cinematic</option>
+    <option value="3d-model">3d-model</option>
+    <option value="pixel-art">pixel-art</option>
+    <option value="texture">texture</option>
+    <option value="futuristic">futuristic</option>
+    <option value="realism">realism</option>
+    <option value="watercolor">watercolor</option>
+    <option value="photorealistic">photorealistic</option>
+  </select>
+</div>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div id="loader"></div>
+
+<div id="imgdisplayer">
+
+</div>
+
+
+
+
+<script>
+
+var api = "https://api.monsterapi.ai/v1/generate/txt2img";
+  var apikey= "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjcwN2E0NDZmZmU4ODY1ZDM1ZGZkZmRjZjg5ODBiZjRmIiwiY3JlYXRlZF9hdCI6IjIwMjQtMDgtMTVUMDg6MDg6NTEuMzcyMzgxIn0.iglU3tCy8fPNcuvos54l1I-aqBZebKrQT-8xraSDar4";
+  
+  var inputuserval = document.getElementById('inputuserva');
+  console.log(inputuserval);
+  var styleSelect = document.getElementById("styleSelect");
+  
+
+  var geetafunction = async () => {
+
+   var options = {
+    method:"POST" ,
+    headers:{
+      "Authorization" : `Bearer ${apikey}` , 
+     "content-type": "application/json" ,
+    },
+    body: JSON.stringify({
+      "prompt" : inputuserval.value , 
+      "aspect_ratio" : "portrait" , 
+      "guidance_scale" : 5,
+      "safe_filter" : false ,
+      "style" : styleSelect.value
+    })
+  } 
+
+
+   try{
+      var response =  await fetch(api , options);
+      var data  =  await response.json();
+      console.log(response);
+      console.log(data);
+      document.getElementById("code").innerText = data.status_url;
+      display();
+   }catch(error){
+    console.error(error);
+   }
+
+  }
+
+
+  var display = async() =>{
+
+  var idd = document.getElementById("code").innerText;
+  console.log(idd);
+  
+    var options2 = {
+    method:"GET",
+    headers:{
+      "Authorization" : `Bearer ${apikey}` ,
+      "accept" : "application/json"
+    }
+  }
+
+  var response2 = await fetch(idd , options2);
+      var data2 = await response2.json();
+      console.log(response2);
+      console.log(data2);
+      
+      if(data2.result.output){
+
+      var imgdisplayer = document.getElementById("imgdisplayer");
+
+      var img = document.createElement("img");
+      img.style.position="relative";
+      img.style.margin="auto";
+      img.style.width = "100%";
+      imgdisplayer.appendChild(img);
+      
+      var brk = document.createElement("br");
+      imgdisplayer.appendChild(brk);
+      imgdisplayer.appendChild(brk);
+      imgdisplayer.appendChild(brk);
+      imgdisplayer.appendChild(brk);
+      imgdisplayer.appendChild(brk);
+
+      img.src = data2.result.output;
+      console.log("done");
+
+      var a = document.getElementById("loader");
+      a.style.display = "none";
+    
+
+      }else{
+      console.log("empty image");
+      display();
+
+      if(!window.onload){
+      var a = document.getElementById("loader");
+      a.style.display = "block";
+      console.log("not displaying washing machine");
+    }else if(window.load){
+      var a = document.getElementById("loader");
+      a.style.display = "none";
+      console.log("displaying washing machine");
+    }
+
+       // call function with parameters on page load
+   
+      }
+
+  }
+
+
+</script>
+
+</body>
+
+</html>
